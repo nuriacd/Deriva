@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #FFFFFF !important;
+    padding: 15px !important;
+    border-bottom: 1px solid #000000;
+    margin: 0 1em;
+
+}
+
+img {
+    width: 180px;
+    height: auto;
+    position: absolute;
+    top: 10px;
+}
