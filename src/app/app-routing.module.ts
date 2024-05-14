@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'userPage', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: UserPageComponent},
-  {path: 'employeeArea', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE] }, component: EmployeeAreaComponent},
+  {path: 'employeeArea', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE, ROLES.ADMIN] }, component: EmployeeAreaComponent},
   {path: 'adminPanel', canActivate: [authGuard], data: { roles: [ROLES.ADMIN] }, component: AdminPanelComponent},
   
   {path: '', redirectTo: 'home', pathMatch: 'full'},

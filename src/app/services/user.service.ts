@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    private apiUrl = 'http://localhost:8000/user';
+    private apiUrl = 'http://localhost:8001/user';
 
     constructor(private http: HttpClient) { }
 
@@ -22,7 +23,7 @@ export class UserService {
         return this.http.get(`${this.apiUrl}/employees`);
     }
 
-    createUser(data: any): Observable<any> {
+    createUser(data: UserModel): Observable<any> {
         return this.http.post(`${this.apiUrl}/new`, data);
     }
 
@@ -30,7 +31,7 @@ export class UserService {
         return this.http.get(`${this.apiUrl}/${id}`);
     }
 
-    updateUser(id: string, data: any): Observable<any> {
+    updateUser(id: string, data: UserModel): Observable<any> {
         return this.http.put(`${this.apiUrl}/${id}/edit`, data);
     }
 
