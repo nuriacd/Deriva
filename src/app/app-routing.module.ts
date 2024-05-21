@@ -8,10 +8,12 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { EmployeeAreaComponent } from './employee-area/employee-area.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { LoginComponent } from './login/login.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'menu', component: MenuComponent},
 
   {path: 'userPage', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: UserPageComponent},
   {path: 'employeeArea', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE, ROLES.ADMIN] }, component: EmployeeAreaComponent},

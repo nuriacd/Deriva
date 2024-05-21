@@ -18,9 +18,11 @@ export class LoginComponent {
       this.registerForm = this.formBuilder.group({
         email: ['', [Validators.required, Validators.email]],
         name: ['', Validators.required],
-        phone: ['', Validators.required],
-        password: ['', Validators.required],
-        password2: ['', Validators.required]
+        phone: ['', [Validators.required, Validators.pattern('^[9867][0-9]{8}$')]],
+        password: ['', [Validators.required, Validators.pattern('/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/')]],
+        password2: ['', [Validators.required, Validators.pattern('/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/')]]
+      }, {
+        validator: this.match('password', 'password2')
       });
   
       this.loginForm = this.formBuilder.group({
@@ -29,33 +31,53 @@ export class LoginComponent {
       });
     }
 
-  onRegister(): void {
-    if (this.registerForm.valid) {
-      this.userService.createUser(this.registerForm.value).subscribe(
-        response => {
-          console.log(response);
-          // Aquí puedes manejar la respuesta del servidor
-        },
-        error => {
-          console.log(error);
-          // Aquí puedes manejar los errores
-        }
-      );
+  private match(controlName: string, matchingControlName: string) 
+  {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+      
+      if (matchingControl.errors && !matchingControl.errors["mustMatch"]) {
+        return;
+      }
+      
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ "mustMatch": true });
+      } else {
+        matchingControl.setErrors(null);
+      }
     }
   }
 
-  onLogin(): void {
-    if (this.loginForm.valid) {
-      this.userService.login(this.loginForm.value).subscribe(
-        response => {
+  onRegister(): void 
+  {
+    if (this.registerForm.valid) {
+      let subscription = this.userService.createUser(this.registerForm.value).subscribe({
+        next: response => {
           console.log(response);
-          // Aquí puedes manejar la respuesta del servidor
         },
-        error => {
-          console.log(error);
-          // Aquí puedes manejar los errores
-        }
-      );
+        complete: () => {
+          subscription.unsubscribe();
+        },
+        error: console.log
+      });
+    } else {
+      console.log(this.registerForm.errors);
+    }
+  }
+
+  onLogin(): void 
+  {
+    if (this.loginForm.valid) {
+      let subscription = this.userService.login(this.loginForm.value).subscribe({
+        next: response => {
+          console.log(response);
+        },
+        complete: () => {
+          subscription.unsubscribe();
+        },
+        error: console.log
+      });
     }
   }
 }

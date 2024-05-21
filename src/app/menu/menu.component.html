@@ -1,0 +1,107 @@
+<h1>Nuestra Carta</h1>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#starters">Entrantes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#courses">Primeros</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#desserts">Postres</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#drinks">Bebidas</a>
+  </li>
+  <!-- Repite el código anterior para los tabs 'Principales', 'Postres' y 'Bebidas' -->
+</ul>
+
+
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="starters">
+        <div class="card-deck">
+            <div *ngFor="let dish of dishes" class="card">
+                @if (dish.type === 'starter') {
+                    <img class="card-img-top" src="assets/img/menu/dishes/{{dish.id}}.png" alt="Foto de {{dish.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description }}</p>
+                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="link-secondary">VER MÁS</a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-basket-shopping-plus"></i>
+                        </a>
+                    </div>     
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade show active" id="courses">
+        <div class="card-deck">
+            <div *ngFor="let dish of dishes" class="card">
+                @if (dish.type === 'course') {
+                    <img class="card-img-top" src="assets/img/menu/dishes/{{dish.id}}.png" alt="Foto de {{dish.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description }}</p>
+                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="link-secondary">VER MÁS</a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-basket-shopping-plus"></i>
+                        </a>
+                    </div>     
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade show active" id="desserts">
+        <div class="card-deck">
+            <div *ngFor="let dish of dishes" class="card">
+                @if (dish.type === 'dessert') {
+                    <img class="card-img-top" src="assets/img/menu/dishes/{{dish.id}}.png" alt="Foto de {{dish.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dish.name }}</h5>
+                        <p class="card-text">{{ dish.description }}</p>
+                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="link-secondary">VER MÁS</a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-basket-shopping-plus"></i>
+                        </a>
+                    </div>     
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade show active" id="drinks">
+        <div class="card-deck">
+            <div *ngFor="let drink of drinks" class="card">
+                <img class="card-img-top" src="assets/img/menu/drinks/{{drink.id}}.png" alt="Foto de {{drink.name}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ drink.name }}</h5>
+                    <p class="card-text">{{ drink.description }}</p>
+                    <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="link-secondary">VER MÁS</a>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-basket-shopping-plus"></i>
+                    </a>
+                </div>     
+            </div>
+        </div>
+    </div>
+  
+  <!-- Repite el código anterior para los tabs 'Principales', 'Postres' y 'Bebidas', 
+       asegurándote de cambiar la condición en *ngIf para mostrar los platos correctos -->
+
+</div>

@@ -12,3 +12,25 @@ img {
     position: absolute;
     top: 10px;
 }
+
+.no-border {
+    width: min-content !important;
+    background-color: transparent;
+    border: none;
+}
+
+.offcanvas {
+    padding: 1em 2em;
+}
+
+@media screen and (max-width: 992px) {
+    img {
+        width: 120px;
+        left: 70px;
+        top: 5px;
+    }
+
+    .login {
+        display: none;
+    }
+}

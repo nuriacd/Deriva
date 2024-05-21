@@ -1,27 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvasExample">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >
+        <button class="no-border" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >
             <span class="navbar-toggler-icon"></span>
         </button>
     </a>
     
     <a class="navbar-brand mx-auto" routerLink="/home"><img src="assets/img/logo.png" id="logo" alt="Logo Deriva"></a>
-    <button class="btn btn-primary my-2 my-sm-0" routerLink="/login">Iniciar sesión</button>
+    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/login">Iniciar sesión</button>
 </nav>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvas" #offcanvas> 
     <div class="offcanvas-header">
       <h5 class="offcanvas-title text-center" id="offcanvasExampleLabel">Menú</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close no-border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <div>
             <p>
-                <a routerLink="/pricing" >Tarifas</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
+                <a routerLink="/menu" data-bs-dismiss="offcanvas">Carta</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
             </p>
             <p>
-                <a routerLink="/contact" >Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
+                <a routerLink="/contact" data-bs-dismiss="offcanvas">Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
             </p>
+            <button class="btn btn-primary my-2 my-sm-0" routerLink="/login" data-bs-dismiss="offcanvas">Iniciar sesión</button>
         </div>
 
         <div class="buttons">
