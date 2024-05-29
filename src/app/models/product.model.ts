@@ -1,18 +1,21 @@
 export class ProductModel {
-    id: number | null;
+    id: number;
     name: string | null;
-    price: string | null;
+    price: string;
     description: string | null;
-  
+    image: Blob | null;
+
     constructor(
-        id: number | null = null,
+        id: number,
         name: string | null = null,
-        price: string | null = null,
-        description: string | null = null
+        price: string,
+        description: string | null = null,
+        image: Blob | null = null
     ) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
+        this.image = image;
     }
 }

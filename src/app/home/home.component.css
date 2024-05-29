@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.banner {
+    background-image: url('../../assets/img/restaurant.jpg');
+    height: 40vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.transparency {
+    background-color: rgba(0, 0, 0, 0.337);
+    height: 100%;
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.call {
+    background-color: #8076F5;
+    color: white;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 2em;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+}
+
+.grey {
+    background-color: rgb(243, 243, 243);
+}
+
+h5, h3, p {
+    margin: 1em;
+}
+
+.call-btn {
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF;
+    background-color: transparent;
+    width: fit-content !important;
+    padding: 1em 2em !important;
+    font-weight: 500;
+}
+
+.call-btn:hover {
+    background-color: #FFFFFF;
+    color: #8076F5;
+}

@@ -1,0 +1,41 @@
+<div class="container row">
+    <div class="cart col-8">
+        @for (item of shoppingList; track item){
+            <div class="cart-item">
+                <img class="product-image" [src]="getProduct(item.id)?.image" alt="{{getProduct(item.id)?.name}}">
+                <div class="info">
+                    <div class="top">
+                        <h4>{{getProduct(item.id)?.name}}</h4>
+
+                        <div class="qty-buttons">
+                            <button class="qty" (click)="downCart(item.id)">-</button>
+                            <p class="qty">{{item.quantity}}</p>
+                            <button class="qty" (click)="upCart(item.id)">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bottom">
+                        <h5>{{getProduct(item.id)?.price}}€</h5>
+                        <a (click)="removeFromCart(item.id)"><i class="fa fa-trash"></i></a>
+                    </div>
+                                   
+                </div>
+            </div>
+        }
+    </div>
+    
+    <div class="ticket col-3">
+        <h2>Resumen:</h2>
+        @for (item of shoppingList; track item){
+            <div class="ticket-item">
+                <p>{{item.quantity}}x {{getProduct(item.id)?.name}}</p>
+                <p>{{getPrice(getProduct(item.id)?.price, item.quantity)}}€</p>
+            </div>
+            
+        }
+        <h3>Total: {{getTotal()}}€</h3>
+
+        <button class="btn btn-primary">Tramitar</button>
+    </div>
+</div>
+

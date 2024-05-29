@@ -7,7 +7,7 @@ import { OrderModel } from '../models/order.model';
   providedIn: 'root'
 })
 export class OrderService {
-    private apiUrl = 'http://localhost:8000/order';
+    private apiUrl = 'http://localhost:8001/order';
 
     constructor(private _http: HttpClient) { }
 
@@ -31,7 +31,7 @@ export class OrderService {
         return this._http.delete(`${this.apiUrl}/${id}`);
     }
 
-    getPendingOrders(): Observable<OrderModel[]> {
-        return this._http.get<OrderModel[]>(`${this.apiUrl}/pending`);
+    getPendingOrders(restaurantId: string): Observable<any> {
+        return this._http.get(`${this.apiUrl}/pending/${restaurantId}`);
     }
 }

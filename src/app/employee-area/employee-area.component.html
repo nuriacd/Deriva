@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let order of pendingOrders">
+      <mat-card class="mb-4">
+        <mat-card-header>
+          <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
+          <mat-card-subtitle>Estado del pedido: {{ order.status }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Dirección de envío: {{ order.address }}</p>
+          <p>Total: {{ order.price }}</p>
+          <p>Cliente: {{ order.client }}</p>
+          <p>Productos:</p>
+          <ul>
+            <li *ngFor="let product of order.products">{{ product.name }} - {{ product.quantity }}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

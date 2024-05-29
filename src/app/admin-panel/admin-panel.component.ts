@@ -8,6 +8,7 @@ import { ProductService } from '../services/product.service';
 import { ProductModel } from '../models/product.model';
 import { DishModel } from '../models/dish.model';
 import { DrinkModel } from '../models/drink.model';
+import { EmployeeModel } from '../models/employee.model';
 
 
 @Component({
@@ -20,18 +21,18 @@ export class AdminPanelComponent {
 
   clientColumns:string[] = ['id', 'email', 'phone', 'actions'];
   clientSource!: MatTableDataSource<UserModel>;
-  @ViewChild(MatPaginator) clientPaginator!:MatPaginator;
-  @ViewChild(MatSort) clientSort!: MatSort;
+  @ViewChild('clientPaginator') clientPaginator!: MatPaginator;
+  @ViewChild('clientSort') clientSort!: MatSort;
 
   employeeColumns:string[] = ['id', 'email', 'phone', 'restaurant', 'actions'];
-  employeeSource!: MatTableDataSource<UserModel>;
-  @ViewChild(MatPaginator) employeePaginator!:MatPaginator;
-  @ViewChild(MatSort) employeeSort!: MatSort;
+  employeeSource!: MatTableDataSource<EmployeeModel>;
+  @ViewChild('employeePaginator') employeePaginator!: MatPaginator;
+  @ViewChild('employeeSort') employeeSort!: MatSort;
 
   productColumns:string[] = ['id', 'name', 'type', 'actions'];
   productSource!: MatTableDataSource<ProductModel>;
-  @ViewChild(MatPaginator) productPaginator!:MatPaginator;
-  @ViewChild(MatSort) productSort!: MatSort;
+  @ViewChild('productPaginator') productPaginator!: MatPaginator;
+  @ViewChild('productSort') productSort!: MatSort;
   
   constructor(
     private _userService: UserService,
@@ -84,6 +85,7 @@ export class AdminPanelComponent {
       },
       error: console.log
     })
+
   }
 
   applyFilter(event: Event, table: string) {
@@ -108,6 +110,11 @@ export class AdminPanelComponent {
     this.clientSource.filter = '';
     this.employeeSource.filter = '';
     this.productSource.filter = '';
+  }
+
+    // En tu componente TypeScript
+  isDish(object: any): boolean {
+    return object instanceof DishModel;
   }
 
   openClientModal(client: any): void {

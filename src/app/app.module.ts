@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { JwtInterceptor } from './utils/jwt.interceptor';
 import { MenuComponent } from './menu/menu.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AdminPanelComponent,
     LoginComponent,
     MenuComponent,
+    ShoppingCartComponent,
     
   ],
   imports: [
@@ -46,7 +49,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule
   ],
   providers: [
     CookieService,

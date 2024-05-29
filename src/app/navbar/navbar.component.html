@@ -6,6 +6,10 @@
     </a>
     
     <a class="navbar-brand mx-auto" routerLink="/home"><img src="assets/img/logo.png" id="logo" alt="Logo Deriva"></a>
+
+    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/shoppingCart" data-bs-dismiss="offcanvas"><i class="fa-solid fa-cart-shopping"></i></button>
+    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/adminPanel">admin</button>
+    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/employeeArea">employee</button>
     <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/login">Iniciar sesión</button>
 </nav>
 
@@ -22,11 +26,13 @@
             <p>
                 <a routerLink="/contact" data-bs-dismiss="offcanvas">Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
             </p>
-            <button class="btn btn-primary my-2 my-sm-0" routerLink="/login" data-bs-dismiss="offcanvas">Iniciar sesión</button>
         </div>
 
         <div class="buttons">
-           
+            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/shoppingCart" data-bs-dismiss="offcanvas"><i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/adminPanel" data-bs-dismiss="offcanvas">admin</button>
+            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/employeeArea" data-bs-dismiss="offcanvas">employee</button>
+            <button class="btn btn-primary my-2 my-sm-0" routerLink="/login" data-bs-dismiss="offcanvas">Iniciar sesión</button>
         </div>
     </div>
   </div>

@@ -7,15 +7,17 @@ export class DishModel extends ProductModel {
     ingredients: IngredientModel[];
 
     constructor(
-        id: number | null = null,
+        id: number,
         name: string | null = null,
-        price: string | null = null,
+        price: string,
         description: string | null = null,
         type: string | null = null,
         recipe: string | null = null,
-        ingredients: IngredientModel[] = []
+        ingredients: IngredientModel[] = [],
+        image: Blob | null = null
+
     ) {
-        super(id, name, price, description);
+        super(id, name, price, description, image);
         this.type = type;
         this.recipe = recipe;
         this.ingredients = ingredients;

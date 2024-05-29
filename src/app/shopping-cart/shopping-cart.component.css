@@ -1,0 +1,97 @@
+.product-image {
+    width: 200px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cart-item {
+    border: 0.5px solid #e0e0e0;
+    display: flex;
+}
+
+.cart {
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2em;
+}
+
+.top, .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.qty-buttons {
+    display: flex;
+    align-items: stretch;
+    border-radius: 5px;
+    overflow: hidden;
+    width: fit-content;
+    border: 0.2px solid #e0e0e0;
+
+    button{
+        background-color: #d0ccfb;
+        border: none;
+        padding: 0.5em;
+        width: 40px !important;
+        border-radius: 0 !important;
+    }
+
+    p {
+        width: 40px !important;
+        text-align: center;
+        margin: 0;
+        width: 40px !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.ticket {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 100%;
+    background-color: #ededed;
+    padding: 0 30px 40px 30px;
+
+    h3 {
+        margin: 1em 0;
+    
+    }
+
+    h2 {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    button {
+        width: 100% !important;
+    }
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end
+}

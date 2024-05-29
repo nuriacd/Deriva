@@ -10,6 +10,7 @@ import { ProductService } from '../services/product.service';
 })
 export class MenuComponent implements OnInit{
 
+  selectedTab = 'starters';
   dishes: DishModel[] = [];
   drinks: DrinkModel[] = [];
 
@@ -37,5 +38,18 @@ export class MenuComponent implements OnInit{
       },
       error: console.log
     });
+  }
+
+  addToCart(id: number) {
+    let cart = sessionStorage.getItem('cart');
+    let cartObject = cart ? JSON.parse(cart) : {};
+
+    if (cartObject[id]) {
+      cartObject[id] += 1;
+    } else {
+      cartObject[id] = 1;
+    }
+
+    sessionStorage.setItem('cart', JSON.stringify(cartObject));
   }
 }

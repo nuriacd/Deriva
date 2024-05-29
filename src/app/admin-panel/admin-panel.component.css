@@ -16,7 +16,6 @@
 td:last-child, th:last-child {
     text-align: center;
     left: 0px;
-    width: 10%;
     min-width: fit-content;
 
     button:last-child {
@@ -29,6 +28,14 @@ mat-form-field {
 }
 
 .add {
-    width: 60px;
-    height: 60px;
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.celd-actions {
+    .btn {
+        padding: 9px !important;
+        width: 45px !important;
+        margin: 10px 0;
+    }
 }
