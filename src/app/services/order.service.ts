@@ -27,6 +27,10 @@ export class OrderService {
         return this._http.put(`${this.apiUrl}/${id}/edit`, data);
     }
 
+    updateStatus(id: string, status: string): any {
+        return this._http.put(`${this.apiUrl}/${id}/status`, { status: status });
+    }
+
     deleteOrder(id: string): any {
         return this._http.delete(`${this.apiUrl}/${id}`);
     }

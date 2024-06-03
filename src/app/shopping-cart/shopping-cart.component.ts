@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductModel } from '../models/product.model';
 import { ProductService } from '../services/product.service';
+import { OrderModel } from '../models/order.model';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -113,5 +114,21 @@ export class ShoppingCartComponent {
       return 0;
     }
     return (parseFloat(price) * quantity).toFixed(2);
+  }
+
+  checkout() {
+    let cart = sessionStorage.getItem('cart');
+    if (cart) {
+      let cartObj = JSON.parse(cart);
+      let order = new OrderModel(
+        null, 
+        'Pendiente', 
+        'address', 
+        parseFloat(this.getTotal()), 
+        null, 
+        this.shoppingList, 
+        null
+      );
+    }
   }
 }
