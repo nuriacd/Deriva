@@ -1,0 +1,31 @@
+
+<div class="container" >
+  <h1>Mis pedidos</h1>
+    <div *ngIf="orders.length === 0" class="text-center no-orders">
+      <h5>Aún no has realizado ningún pedido.</h5>
+      <h3>¡Empieza tu primer pedido ahora!</h3>
+      <button class="btn btn-secondary" style="color: white; font-size:1.3em" routerLink="/menu/order">Pedir</button>
+    </div>
+    <mat-card *ngFor="let order of orders">
+      <mat-card-header>
+        <mat-card-title>
+          <h4>Pedido del día: {{ order.date }}</h4>
+          <h4>Total: {{ order.price }}€</h4>
+        </mat-card-title>
+        <mat-card-subtitle>Pedido nº {{ order.id }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div>
+          <p>Dirección de envío: {{ order.address }}</p>
+          <p>Productos:</p>
+          <ul>
+            <li *ngFor="let product of order.products">{{product.quantity}}x {{ product.product.name }}</li>
+          </ul>
+        </div>
+        <div class="status-invoice">
+          <h5 class="{{order.status}}">{{ order.status }}</h5>
+          <button class="btn btn-secondary" style="color:white" (click)="downloadInvoice(order)">Descargar factura</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+</div>

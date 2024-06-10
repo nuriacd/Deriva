@@ -1,0 +1,62 @@
+
+<div class="container row">
+    <div class="col-3 text-center menu d-none d-md-block">
+      <h4><i class="fa-solid fa-filter"></i> Opciones</h4>
+
+      <div [class.active]="selectedOpc === 'ingredients'" (click)="selectedOpc = 'ingredients'">
+        <h5>Ingredientes</h5>
+      </div>
+      <div [class.active]="selectedOpc === 'drinks'" (click)="selectedOpc = 'drinks'">
+        <h5>Bebidas</h5>
+      </div>
+      
+      <button class="btn btn-secondary btn-stock" style="color:white" routerLink="/employee-area">Pedidos</button>
+    </div>
+  
+  
+    <div class="col-9 row">
+      <h1>Stock</h1>
+      <div class="stock-container">
+      @if (selectedOpc === 'ingredients') {
+        <div class="items-div" *ngFor="let item of ingredientList" >
+          <p>{{item.name}}</p>
+          <div class="qty-buttons">
+            <button class="qty" (click)="substractIngredient(item.id!)">-</button>
+            <input type="text" id="input-{{item.id}}" class="qty" (change)="changeIngredient(item.id!)" value="{{item.quantity}}">
+            <button class="qty" (click)="addIngredient(item.id!)">+</button>
+          </div>
+        </div>
+      }
+  
+      @else if (selectedOpc === 'drinks') {
+        <div class="items-div" *ngFor="let item of drinkList" >
+          <p>{{item.name}}</p>
+          <div class="qty-buttons">
+            <button class="qty" (click)="substractDrink(item.id)">-</button>
+            <input type="text" id="input-{{item.id}}" class="qty" (change)="changeDrink(item.id)" value="{{item.quantity}}">
+            <button class="qty" (click)="addDrink(item.id)">+</button>
+          </div>
+        </div>
+      }
+  
+  <div class="menu-icon d-md-none">
+    <i class="fa fa-filter" id="offcanvas-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"></i>
+  
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
+      <div class="offcanvas-header">
+        <h4><i class="fa-solid fa-filter"></i> Opciones</h4>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          <div [class.active]="selectedOpc === 'ingredients'" (click)="selectedOpc = 'ingredients'" data-bs-dismiss="offcanvas">
+            <h5>Ingredientes</h5>
+          </div>
+          <div [class.active]="selectedOpc === 'drinks'" (click)="selectedOpc = 'drinks'" data-bs-dismiss="offcanvas">
+            <h5>Bebidas</h5>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-stock" style="color:white" routerLink="/employee-area" data-bs-dismiss="offcanvas">Pedidos</button>  
+      </div>
+    </div>
+  </div>

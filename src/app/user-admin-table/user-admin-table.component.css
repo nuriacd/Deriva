@@ -1,0 +1,33 @@
+.search {
+    margin: 2em 0;
+    display: flex;
+    gap: 1em;
+    align-items: start;
+}
+
+td:last-child, th:last-child {
+    text-align: center;
+    left: 0px;
+    min-width: fit-content;
+
+    button:last-child {
+        margin-left: 0.5em;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.add {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+.celd-actions {
+    .btn {
+        padding: 9px !important;
+        width: 45px !important;
+        margin: 10px 0;
+    }
+}

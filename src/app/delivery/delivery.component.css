@@ -1,0 +1,54 @@
+.container-fluid {
+    padding: 0;
+    background-image: url('../../assets/img/delivery-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 60vh;
+    margin-bottom: 100px;
+}
+
+h4, h5 {
+    color: white;
+    text-align: center;
+}
+
+h4 {
+    margin-bottom: 2em;
+}
+
+h5 {
+    margin-top: 2em;
+}
+
+.blur {
+    background-color: rgba(27, 36, 46, 0.623);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(1px);
+}
+
+select {
+    padding: 1em 2em;
+    min-width: 250px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+@media screen and (max-width: 770px) {
+    .actions.text-end {
+        display: flex;
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center;
+    }
+}

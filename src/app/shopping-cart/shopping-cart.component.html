@@ -1,4 +1,5 @@
 <div class="container row">
+    <h1>Carrito</h1>
     <div class="cart col-8">
         @for (item of shoppingList; track item){
             <div class="cart-item">
@@ -35,7 +36,7 @@
         }
         <h3>Total: {{getTotal()}}€</h3>
 
-        <button class="btn btn-primary">Tramitar</button>
+        <button class="btn btn-primary" routerLink="/check-out">Tramitar</button>
     </div>
 </div>
 

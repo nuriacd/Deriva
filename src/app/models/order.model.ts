@@ -6,18 +6,21 @@ export class OrderModel {
     status: string | null;
     address: string | null;
     price: number | null;
-    client: UserModel | null;
-    products: {id: number,  quantity: number}[];
+    client: string | null;
+    products: Array<{quantity: number, product: ProductModel}>;
     date: string | null;
+    restaurant: number | null;
 
     constructor(
         id: number | null = null,
         status: string | null = null,
         address: string | null = null,
         price: number | null = null,
-        client: UserModel | null = null,
-        products: {id: number,  quantity: number}[] = new Array<{id: number,  quantity: number}>(),
-        date: string | null = null
+        client: string | null = null,
+        products: Array<{quantity: number, product: ProductModel}> = [],
+        date: string | null = null,
+        restaurant: number | null = null
+
     ) {
         this.id = id;
         this.status = status;
@@ -26,5 +29,6 @@ export class OrderModel {
         this.client = client;
         this.products = products;
         this.date = date;
+        this.restaurant = restaurant;
     }
 }

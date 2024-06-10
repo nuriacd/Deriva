@@ -1,0 +1,65 @@
+<div class="container">
+
+    <h1>Envíanos tu información</h1>
+
+    <div class="row">
+        <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="needs-validation col-7">
+
+            <div class="form-floating  mb-3">
+                <input type="text" class="form-control" id="name" placeholder="Nombre y apellidos" formControlName="name" [class.is-invalid]="contactForm.controls['name'].touched && contactForm.controls['name'].invalid">
+                <label for="name">Nombre y apellidos</label>
+
+                <div class="invalid-feedback" *ngIf="contactForm.controls['name'].invalid && contactForm.controls['name'].touched">
+                    <div *ngIf="contactForm.controls['name'].errors?.['required']">Introduzca su nombre.</div>
+                </div>
+            </div>
+
+            <div class="form-floating  mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Ej: correo@ejemplo.com" formControlName="email" [class.is-invalid]="contactForm.controls['email'].touched && contactForm.controls['email'].invalid">
+                <label for="email">Correo electrónico</label>
+
+                <div class="invalid-feedback" *ngIf="contactForm.controls['email'].invalid && contactForm.controls['email'].touched">
+                    <div *ngIf="contactForm.controls['email'].errors?.['required'] || contactForm.controls['email'].errors?.['email'] ">Introduzca un email valido.</div>
+                </div>
+            </div>
+
+            <div>
+                <label for="cv">Currículum vitae</label> <br>
+                <input type="file" class="form-control" id="customFile" accept=".pdf" (change)="showFiles($event)" hidden> 
+                <button class="btn btn-outline-primary" type="button" onclick="document.getElementById('customFile').click()"> 
+                    Subir archivo
+                </button> 
+                <div class="row" id="pdfPreview"></div> 
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block login">Enviar</button>
+            </div>
+        </form>
+
+        <div class="info col-4">
+            <p><i class="fa-solid fa-envelope"></i>cv&#64;derivarestaurant.com</p>
+            <p><i class="fa-solid fa-phone"></i>666 666 666</p>
+            <p><i class="fa-solid fa-calendar-days"></i>Lunes a Domíngos: 12:30 - 23:30</p>
+        </div>
+    </div>
+
+    <div class="row privacy">
+        <h3>Política de privacidad de www.derivarestaurant.es</h3>
+        <p>
+            RESPONSABLE: DerivaRestaurant SL; info&#64;derivarestaurant.es
+        </p>
+        
+        <p>
+            FINALIDAD: Responder a las preguntas y/o consultas formuladas a través de este formulario y gestionar las ideas que nos transmites; realizar envío de información, novedades y contenidos de la web si así nos lo autorizas expresamente.
+        </p>
+
+        <p>
+            DERECHO: Acceso, rectificación, supresión y portabilidad de tus datos, de limitación y oposición a su tratamiento así como, a no ser objeto de decisiones basadas únicamente en el tratamiento automatizado de tus datos, cuando procedan.
+        </p>
+
+        <p>
+            INFORMACIÓN ADICIONAL: Puedes consultar información adicional y detallada sobre nuestra <a routerLink="/privacy">Política de Privacidad</a>.
+        </p>
+    </div>
+</div>

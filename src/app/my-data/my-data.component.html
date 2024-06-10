@@ -1,0 +1,41 @@
+<section>
+    <h2 mat-dialog-title class="text-center">Mis datos</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+
+                <mat-dialog-content>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="registerEmail" formControlName="email" name="email" [class.is-invalid]="userForm.controls['email'].touched && userForm.controls['email'].invalid">
+                        <label for="registerEmail">Correo electrónico</label>
+                        <div class="invalid-feedback" *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+                            <div *ngIf="userForm.controls['email'].errors?.['required']">El correo electrónico es obligatorio</div>
+                            <div *ngIf="userForm.controls['email'].errors?.['email']">El correo electrónico no es válido</div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="registerName" formControlName="name" name="name" [class.is-invalid]="userForm.controls['name'].touched && userForm.controls['name'].invalid">
+                        <label for="registerName">Nombre y apellidos</label>
+                        <div class="invalid-feedback" *ngIf="userForm.controls['name'].invalid && userForm.controls['name'].touched">
+                            <div *ngIf="userForm.controls['name'].errors?.['required']">El nombre es obligatorio</div>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="registerPhone" formControlName="phone" name="phone" [class.is-invalid]="userForm.controls['phone'].touched && userForm.controls['phone'].invalid">
+                        <label for="registerPhone">Teléfono</label>
+                        <div class="invalid-feedback" *ngIf="userForm.controls['phone'].invalid && userForm.controls['phone'].touched">
+                            <div *ngIf="userForm.controls['phone'].errors?.['required']">El número de teléfono es obligatorio</div>
+                            <div *ngIf="userForm.controls['phone'].errors?.['pattern']">El número de telefono no es válido</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="color: white;" mat-dialog-close (click)="openPwd()">Cambiar la contraseña</button>
+                </mat-dialog-content>
+
+                <mat-dialog-actions>
+                    <button class="btn btn-outline-primary" mat-dialog-close>Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </mat-dialog-actions>
+            </form>
+        </div>
+    </div>
+</section>

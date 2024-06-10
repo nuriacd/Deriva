@@ -8,14 +8,12 @@ export class EmployeeModel extends UserModel {
     constructor(
         id: number | null = null,
         email: string | null = null,
-        roles: string[] = [],
-        password: string | null = null,
         name: string | null = null,
         phone: string | null = null,
         type: string | null = null,
         restaurant: RestaurantModel | null = null
     ) {
-        super(id, email, roles, password, name, phone);
+        super(id, email, name, phone);
         this.type = type;
         this.restaurant = restaurant;
     }

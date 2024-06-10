@@ -1,0 +1,8 @@
+{
+    "provinces": {
+        "Sevilla": ["Sevilla", "Dos Hermanas"],
+        "Cádiz": ["Cádiz", "Jerez de la Frontera", "San Fernando"],
+        "Huelva": ["Huelva", "Almonte"],
+        "Malaga": ["Málaga", "Marbella"]
+    }
+}

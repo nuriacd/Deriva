@@ -7,10 +7,8 @@
     
     <a class="navbar-brand mx-auto" routerLink="/home"><img src="assets/img/logo.png" id="logo" alt="Logo Deriva"></a>
 
-    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/shoppingCart" data-bs-dismiss="offcanvas"><i class="fa-solid fa-cart-shopping"></i></button>
-    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/adminPanel">admin</button>
-    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/employeeArea">employee</button>
-    <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/login">Iniciar sesión</button>
+    <button class="btn btn-primary navbar-btn" routerLink="/login" *ngIf="!isLogged()">Iniciar sesión</button>
+    <button class="btn btn-primary navbar-btn" routerLink="/menu/order" *ngIf="isLogged()">Pedir</button>
 </nav>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvas" #offcanvas> 
@@ -21,19 +19,25 @@
     <div class="offcanvas-body">
         <div>
             <p>
-                <a routerLink="/menu" data-bs-dismiss="offcanvas">Carta</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
+                <a routerLink="/menu/see" data-bs-dismiss="offcanvas" class="offcanvas-link">Carta</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
             </p>
             <p>
-                <a routerLink="/contact" data-bs-dismiss="offcanvas">Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
+                <a routerLink="/my-orders" data-bs-dismiss="offcanvas" class="offcanvas-link">Mis pedidos</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
+            </p>
+            <p>
+                <a (click)="showData()" data-bs-dismiss="offcanvas" class="offcanvas-link">Mis datos</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
+
+                <!--<a routerLink="/contact-page" data-bs-dismiss="offcanvas" class="offcanvas-link">Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
             </p>
         </div>
 
         <div class="buttons">
-            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/shoppingCart" data-bs-dismiss="offcanvas"><i class="fa-solid fa-cart-shopping"></i></button>
-            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/adminPanel" data-bs-dismiss="offcanvas">admin</button>
-            <button class="btn btn-primary my-2 my-sm-0 login" routerLink="/employeeArea" data-bs-dismiss="offcanvas">employee</button>
-            <button class="btn btn-primary my-2 my-sm-0" routerLink="/login" data-bs-dismiss="offcanvas">Iniciar sesión</button>
+            <button class="btn btn-primary" routerLink="/admin-panel" data-bs-dismiss="offcanvas" >Administración</button>
+            <button class="btn btn-primary" routerLink="/employee-area" data-bs-dismiss="offcanvas" >Pedidos</button>
+            <button class="btn btn-primary" routerLink="/login" data-bs-dismiss="offcanvas" *ngIf="!isLogged()">Iniciar sesión</button>
+            <button class="btn btn-primary" routerLink="/menu/order" data-bs-dismiss="offcanvas" *ngIf="isLogged()">Pedir</button>
+            <button class="btn btn-outline-primary" (click)="logOut()" data-bs-dismiss="offcanvas" *ngIf="isLogged()">Cerrar Sesión</button>
         </div>
     </div>
-  </div>
+</div>
 

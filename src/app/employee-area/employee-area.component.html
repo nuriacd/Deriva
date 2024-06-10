@@ -1,21 +1,166 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4" *ngFor="let order of pendingOrders">
-      <mat-card class="mb-4">
-        <mat-card-header>
-          <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
-          <mat-card-subtitle>Estado del pedido: {{ order.status }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Dirección de envío: {{ order.address }}</p>
-          <p>Total: {{ order.price }}</p>
-          <p>Cliente: {{ order.client }}</p>
-          <p>Productos:</p>
-          <ul>
-            <li *ngFor="let product of order.products">{{ product.name }} - {{ product.quantity }}</li>
-          </ul>
-        </mat-card-content>
-      </mat-card>
+
+<div class="container row">
+  <div class="col-3 text-center menu d-none d-md-block">
+
+    <!--<input type="text" id="search-input" placeholder="Buscar pedidos..." (input)="searchOrders($event)">
+    <button (click)="clearSearch()"></button>-->
+    
+    <h4><i class="fa-solid fa-filter"></i> Opciones</h4>
+    <div [class.active]="selectedOpc === 'pending'" (click)="selectedOpc = 'pending'">
+      <h5>Pendientes</h5>
+    </div>
+    <div [class.active]="selectedOpc === 'complete'" (click)="selectedOpc = 'complete'">
+      <h5>Completados</h5>
+    </div>
+    <div [class.active]="selectedOpc === 'cancelled'" (click)="selectedOpc = 'cancelled'">
+      <h5>Cancelados</h5>
+    </div>
+    <div [class.active]="selectedOpc === 'all'" (click)="selectedOpc = 'all'">
+      <h5>Todos</h5>
+    </div>
+    
+    <button class="btn btn-secondary btn-stock" style="color:white" routerLink="/stock">Gestionar Stock</button>
+  </div>
+
+
+  <div class="col-9 row">
+    <h1>Pedidos</h1>
+    <div class="card-container">
+    @if (selectedOpc === 'pending') {
+      <div *ngIf="pendingOrders.length === 0" class="text-center no-orders">
+        <h5>Aún no hay ningún pedido.</h5>
+      </div>
+      <div class="card-div" *ngFor="let order of pendingOrders" >
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p><span class="bold">Dirección de envío:</span> {{ order.address }}</p>
+            <p><span class="bold">Total: </span>{{ order.price }}€</p>
+            <p><span class="bold">Cliente: </span>{{ order.client }}</p>
+            <p><span class="bold">Productos:</span></p>
+            <ul>
+              <li *ngFor="let product of order.products">{{product.quantity}}x {{ product.product.name }}</li>
+            </ul>
+
+            <select class="form-select" id="{{order.id}}" style="background-color: #ff9800; color:white;" (change)="changeStatus($event)">
+              <option value="Pendiente" selected style="color: #ff9800;">Pendiente</option>
+              <option value="Completado" style="color: #4CAF50;">Completado</option>
+              <option value="Cancelado" style="color: #FC0F0F;">Cancelado</option>
+            </select>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+
+    @else if (selectedOpc === 'complete') {
+      <div *ngIf="completeOrders.length === 0" class="text-center no-orders">
+        <h5>Aún no hay ningún pedido.</h5>
+      </div>
+      <div class="card-div" *ngFor="let order of completeOrders" >
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p><span class="bold">Dirección de envío:</span> {{ order.address }}</p>
+            <p><span class="bold">Total: </span>{{ order.price }}€</p>
+            <p><span class="bold">Cliente: </span>{{ order.client }}</p>
+            <p><span class="bold">Productos:</span></p>
+            <ul>
+              <li *ngFor="let product of order.products">{{product.quantity}}x {{ product.product.name }}</li>
+            </ul>
+
+            <select class="form-select" id="{{order.id}}" style="background-color: #4CAF50; color:white;" (change)="changeStatus($event)">
+              <option value="Pendiente" style="color: #ff9800;">Pendiente</option>
+              <option value="Completado" selected style="color: #4CAF50;">Completado</option>
+              <option value="Cancelado" style="color: #FC0F0F;">Cancelado</option>
+            </select>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+
+    @else if (selectedOpc === 'cancelled') {
+      <div *ngIf="cancelledOrders.length === 0" class="text-center no-orders">
+        <h5>Aún no hay ningún pedido.</h5>
+      </div>
+      <div class="card-div" *ngFor="let order of cancelledOrders" >
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p><span class="bold">Dirección de envío:</span> {{ order.address }}</p>
+            <p><span class="bold">Total: </span>{{ order.price }}€</p>
+            <p><span class="bold">Cliente: </span>{{ order.client }}</p>
+            <p><span class="bold">Productos:</span></p>
+            <ul>
+              <li *ngFor="let product of order.products">{{product.quantity}}x {{ product.product.name }}</li>
+            </ul>
+
+            <select class="form-select" id="{{order.id}}" style="background-color: #FC0F0F; color:white;" (change)="changeStatus($event)">
+              <option value="Pendiente" style="color: #ff9800;">Pendiente</option>
+              <option value="Completado" style="color: #4CAF50;">Completado</option>
+              <option value="Cancelado" selected style="color: #FC0F0F;">Cancelado</option>
+            </select>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+
+    @if (selectedOpc === 'all') {
+      <div *ngIf="allOrders.length === 0" class="text-center no-orders">
+        <h5>Aún no hay ningún pedido.</h5>
+      </div>
+      <div class="card-div" *ngFor="let order of allOrders" >
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Pedido nº{{ order.id }}</mat-card-title>
+            <mat-card-subtitle>Estado del pedido: <span class="{{order.status}}">{{ order.status }}</span></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p><span class="bold">Dirección de envío:</span> {{ order.address }}</p>
+            <p><span class="bold">Total: </span>{{ order.price }}€</p>
+            <p><span class="bold">Cliente: </span>{{ order.client }}</p>
+            <p><span class="bold">Productos:</span></p>
+            <ul>
+              <li *ngFor="let product of order.products">{{product.quantity}}x {{ product.product.name }}</li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+    </div>
+  </div>
+</div>
+
+<div class="menu-icon d-md-none">
+  <i class="fa fa-filter" id="offcanvas-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"></i>
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasMenu">
+    <div class="offcanvas-header">
+      <h4><i class="fa-solid fa-filter"></i> Opciones</h4>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        <div>
+          <h5 [class.active]="selectedOpc === 'pending'" (click)="selectedOpc = 'pending'" data-bs-dismiss="offcanvas">Pendientes</h5>
+        </div>
+        <div [class.active]="selectedOpc === 'complete'" (click)="selectedOpc = 'complete'" data-bs-dismiss="offcanvas">
+          <h5>Completados</h5>
+        </div>
+        <div [class.active]="selectedOpc === 'cancelled'" (click)="selectedOpc = 'cancelled'" data-bs-dismiss="offcanvas">
+          <h5>Cancelados</h5>
+        </div>
+        <div [class.active]="selectedOpc === 'all'" (click)="selectedOpc = 'all'" data-bs-dismiss="offcanvas">
+          <h5>Todos</h5>
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-stock" style="color:white" routerLink="/stock" data-bs-dismiss="offcanvas">Gestionar Stock</button>
+
     </div>
   </div>
 </div>

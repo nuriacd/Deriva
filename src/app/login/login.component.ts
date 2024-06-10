@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+
+import * as jwt_decode from 'jwt-decode';
+import { AuthService } from '../services/auth.service';
+import { EmployeeModel } from '../models/employee.model';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +17,25 @@ export class LoginComponent {
   registerForm: FormGroup;
   loginForm: FormGroup;
 
+  registerSubmitted = false;
+  loginError: string | null = null;
+
   constructor(
     private formBuilder: FormBuilder, 
     private _userService: UserService,
-    private _cookieService: CookieService
+    private _cookieService: CookieService,
+    private _router: Router,
+    private _authService: AuthService
   ) 
   { 
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('^[9867][0-9]{8}$')]],
-      password: ['', [Validators.required, Validators.pattern('/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/')]],
-      password2: ['', [Validators.required, Validators.pattern('/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/')]]
-    }, {
-      validator: this.match('password', 'password2')
-    });
+      password: ['', [Validators.required, this.passwordComplexityValidator]],
+      password2: ['', [Validators.required, this.passwordComplexityValidator]],
+      terms: [false, Validators.requiredTrue]
+    }, {validator: this.checkPasswords});
 
     this.loginForm = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
@@ -34,33 +43,43 @@ export class LoginComponent {
     });
   }
 
-  private match(controlName: string, matchingControlName: string) 
-  {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-      
-      if (matchingControl.errors && !matchingControl.errors["mustMatch"]) {
-        return;
-      }
-      
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ "mustMatch": true });
-      } else {
-        matchingControl.setErrors(null);
-      }
+  checkPasswords(group: FormGroup) {
+    const password = group.get('password')?.value;
+    const password2 = group.get('password2')?.value;
+  
+    return password === password2 ? null : { mustMatch: true };
+  }
+
+  passwordComplexityValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.value;
+    if (!password) {
+      return null;
     }
+  
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumeric = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%!?*.]/.test(password);
+    const hasMinLength = password.length >= 8;
+  
+    const isValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar && hasMinLength;
+  
+    return isValid ? null : { 'complexity': true };
   }
 
   onRegister(): void 
   {
+    this.loginError = null;
+    this.registerSubmitted = true;
+    
     if (this.registerForm.valid) {
       let subscription = this._userService.createUser(this.registerForm.value).subscribe({
         next: response => {
-          console.log(response);
+          this._cookieService.set('derivaUserToken', response["token"]);
         },
         complete: () => {
           subscription.unsubscribe();
+          this._router.navigate(['/menu/order']);
         },
         error: console.log
       });
@@ -71,16 +90,45 @@ export class LoginComponent {
 
   onLogin(): void 
   {
+    this.registerSubmitted = false;
+
+    if (this.loginForm.value.loginEmail == "" || this.loginForm.value.loginPassword == "") {
+      this.loginError = "Debe rellenar los campos de email y contraseña";
+    } else {
     if (this.loginForm.valid) {
       let subscription = this._userService.login(this.loginForm.value).subscribe({
         next: response => {
-          this._cookieService.set('derivaRestaurantToken', response["token"]);
+          this._cookieService.set('derivaUserToken', response["token"]);
         },
         complete: () => {
+          this.loginError = null;
           subscription.unsubscribe();
+
+          if (this._authService.hasRole("ROLE_EMPLOYEE")) {
+            let tokenPayload: any = jwt_decode.jwtDecode(this._cookieService.get('derivaUserToken'));
+            const id = tokenPayload.id;
+
+            let subscription = this._userService.getUser(id).subscribe({
+              next: (response: EmployeeModel) => {
+                sessionStorage.setItem("derivaRestaurant", JSON.stringify(response.restaurant));
+              },
+              complete: () => {
+                subscription.unsubscribe();
+              },
+              error: console.log
+            });
+          }
+
+          this._router.navigate(['/menu/order']);
         },
-        error: console.log
+        error: () => {
+          this.loginError = "Credenciales incorrectas";
+        }
       });
+    } else {
+      this.loginError = "Credenciales incorrectas";
     }
+    }
+
   }
 }

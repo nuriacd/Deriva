@@ -1,0 +1,39 @@
+label {
+    color: #858585;
+}
+
+.container {
+    margin: 100px auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.col {
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+button {
+    margin: 20px auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#login {
+    background-color: #f0f0f0e5;
+}

@@ -1,0 +1,41 @@
+[type="submit"] {
+    margin: 3em auto;
+}
+
+#pdfPreview {
+    margin-top: 2em;
+}
+
+.container {
+    margin: 100px auto;
+}
+
+.row {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+h1 {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+i {
+    margin: 0 20px;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.privacy {
+    width: 90%;
+    margin: auto;
+    padding: 30px !important;
+    background-color: #f5f5f5;
+}
+
+label {
+    color: #858585;
+}

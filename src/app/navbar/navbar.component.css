@@ -23,6 +23,27 @@ img {
     padding: 1em 2em;
 }
 
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    button {
+        width: 100% !important;
+        margin: 0.5em;
+
+    }
+}
+
+.offcanvas-link {
+    color: #000000;
+    text-decoration: none;
+}
+
+.offcanvas-link:hover {
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 992px) {
     img {
         width: 120px;
@@ -31,6 +52,18 @@ img {
     }
 
     .login {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    img {
+        width: 120px;
+        left: 70px;
+        top: 5px;
+    }
+
+    .navbar-btn {
         display: none;
     }
 }

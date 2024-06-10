@@ -1,10 +1,25 @@
+h1 {
+    margin-bottom: 50px;
+}
+
 .container {
     min-height: 85vh;
+    margin: 100px auto;
 }
 
 .nav-tabs {
     margin-top: 3em;
 }
+
+.nav-link {
+    font-size: 1.2rem;
+    padding: 1em 2em;
+}
+
+.nav-link.active {
+    font-weight: 500;
+}
+
 
 .search {
     margin: 2em 0;
@@ -38,4 +53,11 @@ mat-form-field {
         width: 45px !important;
         margin: 10px 0;
     }
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        margin: 60px 0;
+    }
+
 }

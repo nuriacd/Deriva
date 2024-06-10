@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ProductModel } from '../models/product.model';
 import { ProductService } from '../services/product.service';
 import { OrderModel } from '../models/order.model';
+import { OrderService } from '../services/order.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,12 +14,17 @@ export class ShoppingCartComponent {
   shoppingList: { id: number, quantity: number }[] = [];
   productList: { id: number, model: ProductModel }[] = [];
 
-  constructor(private _productService: ProductService) {
+  constructor(
+    private _orderService: OrderService,
+    private _productService: ProductService,
+    private _cookieService: CookieService
+  ) {
     this.getList();
     this.getModel();
   }
 
-  getList() {
+  getList() 
+  {
     let cart = sessionStorage.getItem('cart');
 
     if (cart){
@@ -29,7 +36,8 @@ export class ShoppingCartComponent {
     }
   }
 
-  getModel() {
+  getModel() 
+  {
     for (let item of this.shoppingList) {
       let subscription = this._productService.getProduct(item.id).subscribe({
         next: product => {
@@ -47,7 +55,8 @@ export class ShoppingCartComponent {
     }
   }
 
-  removeFromCart(id: number) {
+  removeFromCart(id: number) 
+  {
     this.shoppingList = this.shoppingList.filter(item => item.id !== id);
 
     let cart = sessionStorage.getItem('cart');
@@ -58,7 +67,8 @@ export class ShoppingCartComponent {
     }
   }
 
-  downCart(id: number) {
+  downCart(id: number) 
+  {
     let item = this.shoppingList.find(item => item.id === id);
 
     if (item && item.quantity > 1) {
@@ -76,7 +86,8 @@ export class ShoppingCartComponent {
     }
   }
 
-  upCart(id: number) {
+  upCart(id: number) 
+  {
     let item = this.shoppingList.find(item => item.id === id);
     if (item) {
       item.quantity++;
@@ -91,7 +102,8 @@ export class ShoppingCartComponent {
     }
   }
 
-  getTotal() {
+  getTotal() 
+  {
     let total = 0;
     for (let item of this.shoppingList) {
       let product = this.productList.find(product => product.id === item.id);
@@ -102,33 +114,21 @@ export class ShoppingCartComponent {
     return total.toFixed(2);
   }
 
-  getProduct(id: number): ProductModel | undefined {
+  getProduct(id: number): ProductModel | undefined 
+  {
     let product = this.productList.find(product => product.id === id);
     let model = product?.model;
 
     return model;
   }
 
-  getPrice(price: string | undefined, quantity: number) {
+  getPrice(price: string | undefined, quantity: number) 
+  {
     if (!price) {
       return 0;
     }
     return (parseFloat(price) * quantity).toFixed(2);
   }
 
-  checkout() {
-    let cart = sessionStorage.getItem('cart');
-    if (cart) {
-      let cartObj = JSON.parse(cart);
-      let order = new OrderModel(
-        null, 
-        'Pendiente', 
-        'address', 
-        parseFloat(this.getTotal()), 
-        null, 
-        this.shoppingList, 
-        null
-      );
-    }
-  }
+  
 }

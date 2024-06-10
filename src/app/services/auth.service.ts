@@ -13,14 +13,14 @@ export class AuthService {
     ) { }
     
     isAuthenticatedUser() {
-        let token = this._cookieService.get('tokenEventMakerLoondit');
+        let token = this._cookieService.get('derivaUserToken');
 
         return token ? true : false;
     }
   
     hasRole(role: string): boolean
     {
-        let token = this._cookieService.get('tokenEventMakerLoondit');
+        let token = this._cookieService.get('derivaUserToken');
 
         if (token)
         {

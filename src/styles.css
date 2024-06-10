@@ -6,3 +6,26 @@ button {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('./assets/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Tajawal';
+    src: url('./assets/fonts/Tajawal-Regular.ttf');
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Tajawal' !important;
+    font-weight: 700;
+}
+
+p, h5, button, a {
+    font-family: 'OpenSans' !important;
+}
+
+h5 {
+    font-weight: 700;
+}

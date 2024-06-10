@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +26,21 @@ import { JwtInterceptor } from './utils/jwt.interceptor';
 import { MenuComponent } from './menu/menu.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { ProdctAdminTableComponent } from './prodct-admin-table/prodct-admin-table.component';
+import { UserAdminTableComponent } from './user-admin-table/user-admin-table.component';
+import { EmployeeAdminTableComponent } from './employee-admin-table/employee-admin-table.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { WorkWithUsComponent } from './work-with-us/work-with-us.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { CookiesComponent } from './cookies/cookies.component';
+import { UseConditionsComponent } from './use-conditions/use-conditions.component';
+import { PurchaseConditionsComponent } from './purchase-conditions/purchase-conditions.component';
+import { MyDataComponent } from './my-data/my-data.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { StockComponent } from './stock/stock.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +54,21 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     LoginComponent,
     MenuComponent,
     ShoppingCartComponent,
+    DeliveryComponent,
+    ProdctAdminTableComponent,
+    UserAdminTableComponent,
+    EmployeeAdminTableComponent,
+    MyOrdersComponent,
+    ContactPageComponent,
+    WorkWithUsComponent,
+    PrivacyComponent,
+    CookiesComponent,
+    UseConditionsComponent,
+    PurchaseConditionsComponent,
+    MyDataComponent,
+    ChangePasswordComponent,
+    CheckOutComponent,
+    StockComponent,
     
   ],
   imports: [
@@ -50,10 +82,13 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MatInputModule,
     MatPaginatorModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
   ],
   providers: [
     CookieService,
+    { provide: MAT_DIALOG_DATA, useValue:{} },
+    { provide: MatDialogRef, useValue:{} },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     provideAnimationsAsync()
   ],

@@ -30,16 +30,12 @@ export class UserService {
         return this._http.post(`${this.apiUrl}/new`, data);
     }
 
-    getUser(id: string): Observable<UserModel> {
-        return this._http.get<UserModel>(`${this.apiUrl}/${id}`);
+    getUser(id: string): Observable<any> {
+        return this._http.get(`${this.apiUrl}/${id}/get`);
     }
 
     updateUser(id: string, data: UserModel): Observable<any> {
         return this._http.put(`${this.apiUrl}/${id}/edit`, data);
-    }
-
-    updatePassword(id: string, data: any): Observable<any> {
-        return this._http.put(`${this.apiUrl}/${id}/editPwd`, data);
     }
 
     deleteUser(id: string): Observable<any> {
@@ -50,7 +46,18 @@ export class UserService {
         return this._http.post(`${this.apiUrl}/login`, data);
     }
 
-    checkPassword(id: string, data: any): Observable<any> {
-        return this._http.post(`${this.apiUrl}/${id}/checkPwd`, data);
+    checkPassword(id: string, password: string)
+    {
+        let request = JSON.parse(`{"password":"${password}"}`);
+
+        return this._http.post(`${this.apiUrl}/${id}/checkPwd`, request)
     }
+
+    changePassword(id: string, newPwd: string, newPwd2: string)
+    {
+        let request = JSON.parse(`{"pwd":"${newPwd}", "pwd2":"${newPwd2}"}`);
+
+        return this._http.put(`${this.apiUrl}/${id}/editPwd`, request);
+    }
+
 }

@@ -1,107 +1,158 @@
-<h1>Nuestra Carta</h1>
 
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" [class.active]="selectedTab === 'starters'" (click)="selectedTab = 'starters'">Entrantes</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [class.active]="selectedTab === 'courses'" (click)="selectedTab = 'courses'">Primeros</a>
-  </li>
-  <li class="nav-item"> 
-    <a class="nav-link" [class.active]="selectedTab === 'desserts'" (click)="selectedTab = 'desserts'">Postres</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" [class.active]="selectedTab === 'drinks'" (click)="selectedTab = 'drinks'">Bebidas</a>
-  </li>
-  <!-- Repite el código anterior para los tabs 'Principales', 'Postres' y 'Bebidas' -->
-</ul>
+@if (isOrder() && !hasRestaurant() && isLogged()) {
+    <h1>Comienza tu pedido</h1>
+    <div>
+        <app-delivery></app-delivery>
+    </div>
+} @else {
+    <h1>Nuestra Carta</h1>
 
-
-
-<div class="tab-content">
-    <div class="tab-pane fade show active container" id="starters" *ngIf="selectedTab === 'starters'">
-        <div class="card-deck row">
-            @for (dish of dishes; track dish){
-                <div *ngIf="dish.type==='starter'" class="card col-3">
-                    <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="selectedTab === 'starters'" (click)="selectedTab = 'starters'">Entrantes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="selectedTab === 'courses'" (click)="selectedTab = 'courses'">Primeros</a>
+        </li>
+        <li class="nav-item"> 
+            <a class="nav-link" [class.active]="selectedTab === 'desserts'" (click)="selectedTab = 'desserts'">Postres</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="selectedTab === 'drinks'" (click)="selectedTab = 'drinks'">Bebidas</a>
+        </li>
+    </ul>
+    
+    <div class="tab-content">
+        <div class="tab-pane fade show active container" id="starters" *ngIf="selectedTab === 'starters'">
+            <div class="card-deck row">
+                @for (dish of dishes; track dish){
+                    <div *ngIf="dish.type==='starter'" class="card col-3">
+                        <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <p class="card-text">{{ dish.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="link-secondary">Ver más +</a>
+                            @if(isOrder()){
+                                @if(inCart(dish.id)){
+                                    <div class="qty-buttons">
+                                        <button class="qty" (click)="downCart(dish.id)">-</button>
+                                        <p class="qty">{{getQty(dish.id)}}</p>
+                                        <button class="qty" (click)="addToCart(dish.id)">+</button>
+                                    </div>
+                                }@else {
+                                    <a class="btn btn-primary btn-cart" (click)="addToCart(dish.id)">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </a>
+                                }
+                            }
+                        </div>     
+                    </div>
+                }
+            </div>
+        </div>
+    
+        <div class="tab-pane fade show active container" id="courses" *ngIf="selectedTab === 'courses'">
+            <div class="card-deck row">
+                @for (dish of dishes; track dish){
+                    <div *ngIf="dish.type==='course'" class="card col-3">
+                        <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <p class="card-text">{{ dish.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="link-secondary">Ver más +</a>
+                            @if(isOrder()){
+                                @if(inCart(dish.id)){
+                                    <div class="qty-buttons">
+                                        <button class="qty" (click)="downCart(dish.id)">-</button>
+                                        <p class="qty">{{getQty(dish.id)}}</p>
+                                        <button class="qty" (click)="addToCart(dish.id)">+</button>
+                                    </div>
+                                }@else {
+                                    <a class="btn btn-primary btn-cart" (click)="addToCart(dish.id)">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </a>
+                                }
+                            }
+                        </div>     
+                    </div>
+                }
+            </div>
+        </div>
+    
+        <div class="tab-pane fade show active container" id="desserts" *ngIf="selectedTab === 'desserts'">
+            <div class="card-deck row">
+                @for (dish of dishes; track dish){
+                    <div *ngIf="dish.type==='dessert'" class="card col-3">
+                        <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ dish.name }}</h5>
+                            <p class="card-text">{{ dish.description }}</p>
+                            <span class="spacer"></span>
+                            <div class="allergens">
+                                @for (ingredient of dish.ingredients; track ingredient){
+                                    @if(ingredient.allergen) {
+                                    <div class="allergen-container" >
+                                        <img class="allergen" src="assets/img/allergens/{{ingredient.allergen}}.png" alt="{{ingredient.allergen}}">
+                                        <div class="allergen-label">{{ingredient.allergen}}</div>
+                                    </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a class="link-secondary">Ver más +</a>
+                            @if(isOrder()){
+                                @if(inCart(dish.id)){
+                                    <div class="qty-buttons">
+                                        <button class="qty" (click)="downCart(dish.id)">-</button>
+                                        <p class="qty">{{getQty(dish.id)}}</p>
+                                        <button class="qty" (click)="addToCart(dish.id)">+</button>
+                                    </div>
+                                }@else {
+                                    <a class="btn btn-primary btn-cart" (click)="addToCart(dish.id)">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                    </a>
+                                }
+                            }
+                        </div>     
+                    </div>
+                }
+            </div>
+        </div>
+    
+        <div class="tab-pane fade show active container" id="drinks" *ngIf="selectedTab === 'drinks'">
+            <div class="card-deck row">
+                <div *ngFor="let drink of drinks" class="card col-3">
+                    <img class="card-img-top" src="{{drink.image}}" alt="Foto de {{drink.name}}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
+                        <h5 class="card-title">{{ drink.name }}</h5>
+                        <p class="card-text">{{ drink.description }}</p>
                     </div>
                     <div class="card-footer">
                         <a class="link-secondary">Ver más +</a>
-                        <a class="btn btn-primary" (click)="addToCart(dish.id)">
-                            <i class="fa-solid fa-cart-plus"></i>
-                        </a>
+                        @if(isOrder()){
+                            @if(inCart(drink.id)){
+                                <div class="qty-buttons">
+                                    <button class="qty" (click)="downCart(drink.id)">-</button>
+                                    <p class="qty">{{getQty(drink.id)}}</p>
+                                    <button class="qty" (click)="addToCart(drink.id)">+</button>
+                                </div>
+                            }@else {
+                                <a class="btn btn-primary btn-cart" (click)="addToCart(drink.id)">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </a>
+                            }
+                        }
                     </div>     
                 </div>
-            }
-        </div>
-    </div>
-
-    <div class="tab-pane fade show active container" id="courses" *ngIf="selectedTab === 'courses'">
-        <div class="card-deck row">
-            @for (dish of dishes; track dish){
-                <div *ngIf="dish.type==='course'" class="card col-3">
-                    <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
-                    </div>
-                    <div class="card-footer">
-                        <a class="link-secondary">Ver más +</a>
-                        <a class="btn btn-primary" (click)="addToCart(dish.id)">
-                            <i class="fa-solid fa-cart-plus"></i>
-                        </a>
-                    </div>     
-                </div>
-            }
-        </div>
-    </div>
-
-    <div class="tab-pane fade show active container" id="desserts" *ngIf="selectedTab === 'desserts'">
-        <div class="card-deck row">
-            @for (dish of dishes; track dish){
-                <div *ngIf="dish.type==='dessert'" class="card col-3">
-                    <img class="card-img-top" src="{{dish.image}}" alt="Foto de {{dish.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                        <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
-                    </div>
-                    <div class="card-footer">
-                        <a class="link-secondary">Ver más +</a>
-                        <a class="btn btn-primary" (click)="addToCart(dish.id)">
-                            <i class="fa-solid fa-cart-plus"></i>
-                        </a>
-                    </div>     
-                </div>
-            }
-        </div>
-    </div>
-
-    <div class="tab-pane fade show active container" id="drinks" *ngIf="selectedTab === 'drinks'">
-        <div class="card-deck row">
-            <div *ngFor="let drink of drinks" class="card col-3">
-                <img class="card-img-top" src="{{drink.image}}" alt="Foto de {{drink.name}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ drink.name }}</h5>
-                    <p class="card-text">{{ drink.description }}</p>
-                    <!-- Aquí puedes agregar la información de los alérgenos si la tienes -->
-                </div>
-                <div class="card-footer">
-                    <a class="link-secondary">Ver más +</a>
-                    <a class="btn btn-primary" (click)="addToCart(drink.id)">
-                        <i class="fa-solid fa-cart-plus"></i>
-                    </a>
-                </div>     
             </div>
         </div>
     </div>
-  
-  <!-- Repite el código anterior para los tabs 'Principales', 'Postres' y 'Bebidas', 
-       asegurándote de cambiar la condición en *ngIf para mostrar los platos correctos -->
 
-  </div>
+    <button *ngIf="isOrder()" id="shopping-cart" class="btn btn-secondary" routerLink="/shopping-cart"><i class="fa-solid fa-cart-shopping" style="color:white"></i></button>
+}
+

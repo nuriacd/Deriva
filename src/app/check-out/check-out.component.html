@@ -1,0 +1,70 @@
+<div class="container row">
+    <h1>Tramitando pedido</h1>
+    <div class="row content">
+        <div class="cart col-8">
+            <h3>Completa tus datos</h3>
+
+            <form class="container-sm" [formGroup]="deliveryForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nombre y apellidos" [class.is-invalid]="deliveryForm.controls['name'].touched && deliveryForm.controls['name'].invalid">
+                    <label for="name">Nombre y apellidos</label>
+                    <div class="invalid-feedback" *ngIf="deliveryForm.controls['name'].touched && deliveryForm.controls['name'].invalid">
+                        <div *ngIf="deliveryForm.controls['name'].errors?.['required']">El nombre es obligatorio</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="address" formControlName="address" placeholder="Dirección" [class.is-invalid]="deliveryForm.controls['address'].touched && deliveryForm.controls['address'].invalid">
+                    <label for="address">Dirección</label>
+                    <div class="invalid-feedback" *ngIf="deliveryForm.controls['address'].touched && deliveryForm.controls['address'].invalid">
+                        <div *ngIf="deliveryForm.controls['address'].errors?.['required']">La dirección es obligatoria</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form mb-3 col">
+                        <select class="form-select form-control" id="province" formControlName="province" (change)="onProvinceChange($event)" [class.is-invalid]="deliveryForm.controls['province'].touched && deliveryForm.controls['province'].invalid">
+                            <option value="" disabled selected>Selecciona una provincia</option>
+                            <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="deliveryForm.controls['province'].touched && deliveryForm.controls['province'].invalid">
+                            <div *ngIf="deliveryForm.controls['province'].errors?.['required']">La provincia es obligatoria</div>
+                        </div>
+                    </div>
+            
+                    <div class="form mb-3 col">
+                        <select class="form-select form-control" id="city" formControlName="city" [class.is-invalid]="deliveryForm.controls['city'].touched && deliveryForm.controls['city'].invalid">
+                            <option value="" disabled selected>Selecciona una ciudad</option>
+                            <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="deliveryForm.controls['city'].touched && deliveryForm.controls['city'].invalid">
+                            <div *ngIf="deliveryForm.controls['city'].errors?.['required']">La ciudad es obligatoria</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Teléfono"  [class.is-invalid]="deliveryForm.controls['phone'].touched && deliveryForm.controls['phone'].invalid">
+                    <label for="phone">Teléfono</label>
+                    <div class="invalid-feedback" *ngIf="deliveryForm.controls['phone'].touched && deliveryForm.controls['phone'].invalid">
+                        <div *ngIf="deliveryForm.controls['phone'].errors?.['required']">El teléfono es obligatorio</div>
+                        <div *ngIf="deliveryForm.controls['phone'].errors?.['pattern']">El teléfono no es válido</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
+        <div class="ticket col-3">
+            <h2>Resumen:</h2>
+            @for (item of shoppingList; track item){
+                <div class="ticket-item">
+                    <p>{{item.quantity}}x {{getProduct(item.id)?.name}}</p>
+                    <p>{{getPrice(getProduct(item.id)?.price, item.quantity)}}€</p>
+                </div>
+                
+            }
+            <h3>Total: {{getTotal()}}€</h3>
+    
+            <button class="btn btn-primary" (click)="checkOut()">Confirmar pedido</button>
+        </div>
+    </div>
+    
+</div>

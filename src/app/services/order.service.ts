@@ -15,12 +15,12 @@ export class OrderService {
         return this._http.get<OrderModel[]>(`${this.apiUrl}`);
     }
 
-    createOrder(data: OrderModel): any {
+    placeOrder(data: OrderModel): any {
         return this._http.post(`${this.apiUrl}/new`, data);
     }
 
     getOrder(id: string): Observable<OrderModel> {
-        return this._http.get<OrderModel>(`${this.apiUrl}/${id}`);
+        return this._http.get<OrderModel>(`${this.apiUrl}/${id}/show`);
     }
 
     updateOrder(id: string, data: OrderModel): any {
@@ -35,7 +35,24 @@ export class OrderService {
         return this._http.delete(`${this.apiUrl}/${id}`);
     }
 
-    getPendingOrders(restaurantId: string): Observable<any> {
-        return this._http.get(`${this.apiUrl}/pending/${restaurantId}`);
+    getPendingOrders(restaurantId: string): Observable<OrderModel[]> {
+        return this._http.get<OrderModel[]>(`${this.apiUrl}/pending/${restaurantId}`);
+    }
+
+    getCancelledOrders(restaurantId: string): Observable<OrderModel[]> {
+        return this._http.get<OrderModel[]>(`${this.apiUrl}/cancelled/${restaurantId}`);
+    }
+
+    getCompleteOrders(restaurantId: string): Observable<OrderModel[]> {
+        return this._http.get<OrderModel[]>(`${this.apiUrl}/complete/${restaurantId}`);
+    }
+
+    getRestaurantOrders(restaurantId: string): Observable<OrderModel[]> {
+        return this._http.get<OrderModel[]>(`${this.apiUrl}/restaurant/${restaurantId}`);
+    }
+
+    getUserOrders(userId: string): Observable<OrderModel[]> {
+        let data = { email: userId };
+        return this._http.post<OrderModel[]>(`${this.apiUrl}/user`, data);
     }
 }
