@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 
 import { ROLES } from './roles';
 import { authGuard } from './utils/auth.guard';
-import { UserPageComponent } from './user-page/user-page.component';
 import { EmployeeAreaComponent } from './employee-area/employee-area.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { LoginComponent } from './login/login.component';
@@ -37,7 +36,6 @@ const routes: Routes = [
   {path: 'check-out', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: CheckOutComponent},
   {path: 'my-data', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: MyOrdersComponent},
   {path: 'shopping-cart', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: ShoppingCartComponent},
-  {path: 'user-page', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: UserPageComponent},
 
   {path: 'employee-area', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE] }, component: EmployeeAreaComponent},
   {path: 'stock', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE] }, component: StockComponent},

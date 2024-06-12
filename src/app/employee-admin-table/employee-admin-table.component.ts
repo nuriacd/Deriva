@@ -66,7 +66,6 @@ export class EmployeeAdminTableComponent {
     dialogRef.afterClosed().subscribe({   
       next: (val) => {
         if (val)
-          this._snackBar.openSnackBar("Empleado creado / modificado con éxito");
           this.loadEmployees();    
       }
     });

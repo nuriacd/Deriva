@@ -3,6 +3,9 @@
         <div class="col">
             <h2>Registro</h2>
             <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <div *ngIf="registerError" class="alert alert-danger" role="alert">
+                    {{ registerError }}
+                </div>
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="registerEmail" formControlName="email" name="email" [class.is-invalid]="(registerForm.controls['email'].touched || registerSubmitted) && registerForm.controls['email'].invalid">
                     <label for="registerEmail">Correo electrónico</label>

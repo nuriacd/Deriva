@@ -67,7 +67,6 @@ export class UserAdminTableComponent {
     dialogRef.afterClosed().subscribe({   
       next: (val) => {
         if (val)
-          this._snackBar.openSnackBar("Usuario creado / modificado con éxito")
           this.loadClients();    
       }
     });

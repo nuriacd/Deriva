@@ -8,6 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { EmployeeModel } from '../models/employee.model';
 import { HttpClient } from '@angular/common/http';
+import { RestaurantService } from '../services/restaurant.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-my-data',
@@ -22,6 +24,8 @@ export class MyDataComponent {
 
   constructor(
     private _userService: UserService,
+    private _restaurantService: RestaurantService,
+    private _snackBarService: SnackBarService,
     private formBuilder: FormBuilder,
     private _http: HttpClient,
     private _dialogRef: MatDialogRef<MyDataComponent>,
@@ -41,12 +45,16 @@ export class MyDataComponent {
   {
     if (this.data && this.data["id"]) {
       this.id = this.data["id"];
-      this.loadUserData();
+
+      if (this.data.employee) {
+        this.loadEmployee();
+        this.loadRestaurants();
+      } else {
+        this.loadUserData();
+      }
+      
     }
 
-    if (this.data.employee) {
-      this.loadRestaurants();
-    }
   }
 
   loadUserData(): void 
@@ -56,7 +64,33 @@ export class MyDataComponent {
         this.userForm.patchValue(data);
       },
       complete: () => {
-        subscripcion.unsubscribe()
+        subscripcion.unsubscribe();
+      },
+      error: console.log
+    })
+  }
+
+  loadEmployee() 
+  {
+    const subscription = this._userService.getUser(this.id).subscribe({
+      next:(data: EmployeeModel) =>{
+        this.userForm.patchValue(data);
+        let restaurant = data.restaurant;
+
+        const subscription = this._restaurantService.getRestaurantName(restaurant).subscribe({
+          next:(data: string) =>{
+            (document.getElementById("restaurant") as HTMLSelectElement).value = data; 
+            
+          },
+          complete: () => {
+            subscription.unsubscribe();
+          },
+          error: console.log
+        })
+        
+      },
+      complete: () => {
+        subscription.unsubscribe();
       },
       error: console.log
     })
@@ -95,14 +129,14 @@ export class MyDataComponent {
     
     const subscription = this._userService.updateUser(this.id, userData).subscribe({
       next: (data) => {
-        console.log('Usuario actualizado');
+        this._snackBarService.openSnackBar("Datos actualizados exitosamente")
         this._dialogRef.close(true);
       },
       complete: () => {
         subscription.unsubscribe();
       },
       error: (error) => {
-        console.log(error);
+        this.error = "El email ya está en uso"
       }
     });
   }
@@ -143,7 +177,7 @@ export class MyDataComponent {
   
     const subscription = this._userService.createEmployee(data).subscribe({
       next: (data) => {
-        console.log('Usuario creado');
+        this._snackBarService.openSnackBar("Usuario creado exitosamente")
         this._dialogRef.close(true);
       },
       complete: () => {
@@ -167,7 +201,7 @@ export class MyDataComponent {
 
     const subscription = this._userService.createUser(data).subscribe({
       next: (data) => {
-        console.log('Usuario creado');
+        this._snackBarService.openSnackBar("Usuario creado exitosamente")
         this._dialogRef.close(true);
       },
       complete: () => {

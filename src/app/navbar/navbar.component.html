@@ -24,10 +24,10 @@
                 <a routerLink="/menu/see" data-bs-dismiss="offcanvas" class="offcanvas-link">Carta</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
             </p>
             <p>
-                <a routerLink="/my-orders" data-bs-dismiss="offcanvas" class="offcanvas-link">Mis pedidos</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
+                <a routerLink="/my-orders" data-bs-dismiss="offcanvas" class="offcanvas-link" *ngIf="isLogged() && !(isAdmin() || isEmployee())">Mis pedidos</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
             </p>
             <p>
-                <a (click)="showData()" data-bs-dismiss="offcanvas" class="offcanvas-link">Mis datos</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
+                <a (click)="showData()" data-bs-dismiss="offcanvas" class="offcanvas-link" *ngIf="isLogged()">Mis datos</a> <!--(click)="changeActive(0); hideOffCanvas()"-->
 
                 <!--<a routerLink="/contact-page" data-bs-dismiss="offcanvas" class="offcanvas-link">Contacto</a> <!--(click)="changeActive(1); hideOffCanvas()"-->
             </p>

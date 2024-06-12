@@ -158,7 +158,7 @@ export class CheckOutComponent implements OnInit{
           if (cart && restaurant && token)
             {
               let tokenPayload: any = jwt_decode.jwtDecode(token)
-              const email = tokenPayload.username;  
+              const id = tokenPayload.id;  
         
               for (let item of this.shoppingList) {
                 let product = this.productList.find(product => product.id === item.id)?.model;
@@ -172,7 +172,7 @@ export class CheckOutComponent implements OnInit{
                 'Pendiente', 
                 address, 
                 parseFloat(this.getTotal()), 
-                email,
+                id,
                 orderItems, 
                 new Date().toISOString(),
                 parseInt(restaurant)

@@ -11,14 +11,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
-import { UserPageComponent } from './user-page/user-page.component';
 import { EmployeeAreaComponent } from './employee-area/employee-area.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { LoginComponent } from './login/login.component';
@@ -50,7 +49,6 @@ import { ProductDataComponent } from './product-data/product-data.component';
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    UserPageComponent,
     EmployeeAreaComponent,
     AdminPanelComponent,
     LoginComponent,
@@ -88,6 +86,8 @@ import { ProductDataComponent } from './product-data/product-data.component';
     MatTableModule,
     MatCardModule,
     MatDialogModule,
+    MatSnackBarModule
+
   ],
   providers: [
     CookieService,

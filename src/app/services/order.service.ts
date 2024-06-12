@@ -51,8 +51,8 @@ export class OrderService {
         return this._http.get<OrderModel[]>(`${this.apiUrl}/restaurant/${restaurantId}`);
     }
 
-    getUserOrders(userId: string): Observable<OrderModel[]> {
-        let data = { email: userId };
+    getUserOrders(id: string): Observable<OrderModel[]> {
+        let data = { id: id };
         return this._http.post<OrderModel[]>(`${this.apiUrl}/user`, data);
     }
 }

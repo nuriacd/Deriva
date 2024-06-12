@@ -27,9 +27,9 @@ export class MyOrdersComponent {
   getOrders() {
     let token = this._cookieService.get('derivaUserToken');
     let tokenPayload: any = jwt_decode.jwtDecode(token)
-    const email = tokenPayload.username;
+    const id = tokenPayload.id;
 
-    const subscription = this._orderService.getUserOrders(email).subscribe({
+    const subscription = this._orderService.getUserOrders(id).subscribe({
       next: (orders) => {
         this.orders = orders;
       },

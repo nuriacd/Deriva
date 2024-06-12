@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as jwt_decode from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { MyDataComponent } from '../my-data/my-data.component';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-change-password',
@@ -18,6 +19,7 @@ export class ChangePasswordComponent {
   constructor(
     private _userService: UserService,
     private formBuilder: FormBuilder,
+    private _snackBarService: SnackBarService,
     private _dialogRef: MatDialogRef<ChangePasswordComponent>,
     private _cookieService: CookieService,
     private _dialog: MatDialog, 
@@ -71,7 +73,6 @@ export class ChangePasswordComponent {
           if (result) 
           {
             this.changePwd(id, newPwd, newPwd2);
-            this._dialogRef.close();
           }
           else 
           {
@@ -92,7 +93,7 @@ export class ChangePasswordComponent {
         next: result => {
           if (result) 
           {
-            console.log("contraseña cambiada correctamente")
+            this._snackBarService.openSnackBar("Contraseña cambiada exitosamente");
             this._dialogRef.close();
           }
         },
@@ -109,7 +110,7 @@ export class ChangePasswordComponent {
     let id = token.id;
 
     if(id)
-      dialogRef = this._dialog.open(MyDataComponent, { data: { id: id } });
+      dialogRef = this._dialog.open(MyDataComponent, { data: { id: id, pwd: true  } });
     else
       dialogRef = this._dialog.open(MyDataComponent);
 
