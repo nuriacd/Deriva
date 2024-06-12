@@ -157,9 +157,15 @@ export class MyDataComponent {
 
   createClient() 
   {
-    const userData = this.userForm.value;
+    let data = {
+      "email": this.userForm.value.email,
+      "name": this.userForm.value.name,
+      "phone": this.userForm.value.phone,
+      "password": '@Password1!',
+      "password2": '@Password1!',
+    }
 
-    const subscription = this._userService.createUser(userData).subscribe({
+    const subscription = this._userService.createUser(data).subscribe({
       next: (data) => {
         console.log('Usuario creado');
         this._dialogRef.close(true);

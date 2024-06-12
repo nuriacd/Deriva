@@ -110,7 +110,7 @@ export class LoginComponent {
           this.loginError = null;
           subscription.unsubscribe();
 
-          if (this._authService.hasRole("ROLE_EMPLOYEE")) {
+          if (this._authService.hasRole("ROLE_EMPLOYEE") || this._authService.hasRole("ROLE_ADMIN")) {
             let tokenPayload: any = jwt_decode.jwtDecode(this._cookieService.get('derivaUserToken'));
             const id = tokenPayload.id;
 
@@ -120,12 +120,14 @@ export class LoginComponent {
               },
               complete: () => {
                 subscription.unsubscribe();
+                this._router.navigate(['/home']);
               },
               error: console.log
             });
+          } else {
+            this._router.navigate(['/menu/order']);
           }
 
-          this._router.navigate(['/menu/order']);
         },
         error: () => {
           this.loginError = "Credenciales incorrectas";

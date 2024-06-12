@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MyDataComponent } from '../my-data/my-data.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-user-admin-table',
@@ -20,6 +21,7 @@ export class UserAdminTableComponent {
 
   constructor(
     private _userService: UserService,
+    private _snackBar: SnackBarService,
     private _dialog: MatDialog,
   ) { }
 
@@ -65,6 +67,7 @@ export class UserAdminTableComponent {
     dialogRef.afterClosed().subscribe({   
       next: (val) => {
         if (val)
+          this._snackBar.openSnackBar("Usuario creado / modificado con éxito")
           this.loadClients();    
       }
     });
@@ -73,7 +76,7 @@ export class UserAdminTableComponent {
   deleteUser(id: number) {
     this._userService.deleteUser(id).subscribe({
       next: (res) => {
-        console.log('Usuario borrado')
+        this._snackBar.openSnackBar("Usuario borrado")
         this.loadClients();
       },
       error: console.log

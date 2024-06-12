@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RestaurantService } from '../services/restaurant.service';
 import { Router } from '@angular/router';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-check-out',
@@ -32,6 +33,7 @@ export class CheckOutComponent implements OnInit{
     private fb: FormBuilder, 
     private http: HttpClient,
     private _restaurantService: RestaurantService,
+    private _snackBar: SnackBarService,
     private _router: Router
   ) {
     this.getList();
@@ -197,6 +199,7 @@ export class CheckOutComponent implements OnInit{
       },
       complete: () => {
         subscription.unsubscribe();
+        this._snackBar.openSnackBar('Pedido realizado con éxito')
         this._router.navigate(['/my-orders']);
       },
       error: console.log

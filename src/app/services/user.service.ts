@@ -26,7 +26,7 @@ export class UserService {
         return this._http.get<EmployeeModel[]>(`${this.apiUrl}/employees`);
     }
 
-    createUser(data: UserModel): Observable<any> {
+    createUser(data: any): Observable<any> {
         return this._http.post(`${this.apiUrl}/new`, data);
     }
 

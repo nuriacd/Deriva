@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeModel } from '../models/employee.model';
 import { MyDataComponent } from '../my-data/my-data.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-employee-admin-table',
@@ -21,6 +22,7 @@ export class EmployeeAdminTableComponent {
   constructor(
     private _userService: UserService,
     private _dialog: MatDialog,
+    private _snackBar: SnackBarService,
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class EmployeeAdminTableComponent {
     dialogRef.afterClosed().subscribe({   
       next: (val) => {
         if (val)
+          this._snackBar.openSnackBar("Empleado creado / modificado con éxito");
           this.loadEmployees();    
       }
     });
@@ -72,7 +75,7 @@ export class EmployeeAdminTableComponent {
   deleteUser(id: number) {
     this._userService.deleteUser(id).subscribe({
       next: (res) => {
-        console.log('Usuario borrado')
+        this._snackBar.openSnackBar("Usuario borrado");
         this.loadEmployees();
       },
       error: console.log
