@@ -3,10 +3,6 @@
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event, 'product')" placeholder="Introduzca algo para buscar" #input>
     </mat-form-field>
-  
-    <button class="btn btn-primary add">
-        <i class="fas fa-plus"></i>
-    </button>
 </div>
 
 <div class="mat-elevation-z8">
@@ -24,11 +20,8 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="celd-actions"> Acciones </th>
             <td mat-cell *matCellDef="let row" class="celd-actions">
-                <button class="btn btn-secondary">
+                <button class="btn btn-secondary" (click)="showProduct(row)">
                     <i style="color: white;" class="fas fa-eye fa-xs"></i>
-                </button>
-                <button class="btn btn-outline-primary">
-                    <i class="fas fa-trash fa-xs"></i>
                 </button>
             </td>
         </ng-container>

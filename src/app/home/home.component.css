@@ -5,15 +5,15 @@
 }
 
 .banner {
-    background-image: url('../../assets/img/restaurant.jpg');
-    height: 40vh;
+    background-image: url('../../assets/img/home-background.jpg');
+    height: fit-content;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .transparency {
-    background-color: rgba(0, 0, 0, 0.337);
+    background-color: rgba(14, 7, 95, 0.41);
     height: 100%;
     width: 100%;
 }
@@ -59,4 +59,87 @@ h5, h3, p {
 .call-btn:hover {
     background-color: #FFFFFF;
     color: #8076F5;
+}
+
+h1 {
+    padding-top: 5%;
+    padding-left: 10%;
+
+    color: #FFFFFF;
+    width: 40%;
+    min-width: 280px;
+}
+
+button.header {
+    margin-left: 10%;
+    margin-top: 2em;
+    margin-bottom: 5%;
+    padding: 0.8em 2em !important;
+}
+
+.text h5 {
+    font-weight: 200 !important;
+    text-align: center;
+    margin: 2em;
+}
+
+#img-1 {
+    width: 100%;
+    margin: 2em;
+}
+
+#img-2, #img-3 {
+    width: 80%;
+    margin: 2em;
+
+}
+
+.col-4, .col-8 {
+    min-width: 280px;
+}
+
+.row {
+    justify-content: center;
+}
+
+@media screen and (max-width: 980px) {
+    .text h5 {
+        width: 100%;
+        margin: 2em 0;
+    }
+
+    .col-4, .col-8 {
+        width: 95%;
+    }
+
+    #img-1, #img-2, #img-3{
+        margin: 0 auto;
+    }
+
+    h1 {
+        padding-top: 5%;
+
+        width: 40%;
+        width: 95%;
+    }
+
+    .transparency {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    button.header {
+        margin: 5% auto
+    }
+
+    .call-btn {
+        margin: 0 auto;
+    }
+
+    .col-4 {
+        display: flex;
+        justify-content: center !important;
+    }
+
 }

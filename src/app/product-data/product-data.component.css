@@ -1,0 +1,22 @@
+img {
+    height: 150px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    font-weight: 600 !important;
+    font-size: 1.6em !important;
+}
+
+section {
+    margin: 1em;
+    max-width: 600px;
+}
+
+mat-dialog-actions {
+    justify-content: center;
+}

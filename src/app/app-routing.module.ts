@@ -19,29 +19,33 @@ import { PurchaseConditionsComponent } from './purchase-conditions/purchase-cond
 import { CookiesComponent } from './cookies/cookies.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { StockComponent } from './stock/stock.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'contact-page', component: ContactPageComponent},
   {path: 'work-with-us', component: WorkWithUsComponent},
-  {path: 'my-orders', component: MyOrdersComponent},
-  {path: 'my-data', component: MyOrdersComponent},
   {path: 'menu/:type', component: MenuComponent},
-  {path: 'check-out', component: CheckOutComponent},
   {path: 'privacy', component: PrivacyComponent},
   {path: 'use-conditions', component: UseConditionsComponent},
   {path: 'purchase-conditions', component: PurchaseConditionsComponent},
   {path: 'cookies', component: CookiesComponent},
+  {path: '404', component: NotFoundComponent},
 
-  {path: 'shopping-cart', /*canActivate: [authGuard], data: { roles: [ROLES.USER] }, */component: ShoppingCartComponent},
-  {path: 'user-page', /*canActivate: [authGuard], data: { roles: [ROLES.USER] }, */component: UserPageComponent},
-  {path: 'employee-area', /*canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE, ROLES.ADMIN] }, */component: EmployeeAreaComponent},
-  {path: 'stock', /*canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE, ROLES.ADMIN] }, */component: StockComponent},
-  {path: 'admin-panel', /*canActivate: [authGuard], data: { roles: [ROLES.ADMIN] }, */component: AdminPanelComponent},
+  {path: 'my-orders', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: MyOrdersComponent},
+  {path: 'check-out', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: CheckOutComponent},
+  {path: 'my-data', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: MyOrdersComponent},
+  {path: 'shopping-cart', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: ShoppingCartComponent},
+  {path: 'user-page', canActivate: [authGuard], data: { roles: [ROLES.USER] }, component: UserPageComponent},
+
+  {path: 'employee-area', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE] }, component: EmployeeAreaComponent},
+  {path: 'stock', canActivate: [authGuard], data: { roles: [ROLES.EMPLOYEE] }, component: StockComponent},
+  
+  {path: 'admin-panel', canActivate: [authGuard], data: { roles: [ROLES.ADMIN] }, component: AdminPanelComponent},
   
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'home', pathMatch: 'full'}
+  {path: '**', redirectTo: '404', pathMatch: 'full'}
 ];
 
 @NgModule({

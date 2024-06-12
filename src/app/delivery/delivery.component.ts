@@ -16,11 +16,11 @@ export class DeliveryComponent {
   selectedProvince: string | null = null;
 
   constructor(
-    private fb: FormBuilder, 
-    private http: HttpClient,
+    private _fb: FormBuilder, 
+    private _http: HttpClient,
     private _restaurantService: RestaurantService
   ) {
-    this.deliveryForm = this.fb.group({
+    this.deliveryForm = this._fb.group({
       /*name: ['', Validators.required],
       address: ['', Validators.required],*/
       province: ['', Validators.required],
@@ -34,7 +34,7 @@ export class DeliveryComponent {
   }
 
   loadProvinces(): void {
-    this.http.get<any>('assets/json/provinces.json').subscribe(data => {
+    this._http.get<any>('assets/json/provinces.json').subscribe(data => {
       this.allData = data.provinces;
       this.provinces = Object.keys(this.allData);
     });

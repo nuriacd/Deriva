@@ -62,7 +62,7 @@ export class NavbarComponent {
     let id = token.id;
 
     if(id)
-      dialogRef = this._dialog.open(MyDataComponent, { data: { id: id } });
+      dialogRef = this._dialog.open(MyDataComponent, { data: { id: id, pwd: true } });
     else
       dialogRef = this._dialog.open(MyDataComponent);
 

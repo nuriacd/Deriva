@@ -8,7 +8,9 @@
     <a class="navbar-brand mx-auto" routerLink="/home"><img src="assets/img/logo.png" id="logo" alt="Logo Deriva"></a>
 
     <button class="btn btn-primary navbar-btn" routerLink="/login" *ngIf="!isLogged()">Iniciar sesión</button>
-    <button class="btn btn-primary navbar-btn" routerLink="/menu/order" *ngIf="isLogged()">Pedir</button>
+    <button class="btn btn-primary navbar-btn" routerLink="/menu/order" *ngIf="isLogged() && !(isAdmin() || isEmployee())">Pedir</button>
+    <button class="btn btn-primary navbar-btn" routerLink="/employee-area" *ngIf="isEmployee() && !isAdmin()">Pedidos</button>
+    <button class="btn btn-primary navbar-btn" routerLink="/admin-panel" *ngIf="isAdmin()">Administración</button>
 </nav>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" aria-labelledby="offcanvas" #offcanvas> 
@@ -32,10 +34,10 @@
         </div>
 
         <div class="buttons">
-            <button class="btn btn-primary" routerLink="/admin-panel" data-bs-dismiss="offcanvas" >Administración</button>
-            <button class="btn btn-primary" routerLink="/employee-area" data-bs-dismiss="offcanvas" >Pedidos</button>
+            <button class="btn btn-primary" routerLink="/admin-panel" data-bs-dismiss="offcanvas" *ngIf="isAdmin()">Administración</button>
+            <button class="btn btn-primary" routerLink="/employee-area" data-bs-dismiss="offcanvas" *ngIf="isEmployee()">Pedidos</button>
             <button class="btn btn-primary" routerLink="/login" data-bs-dismiss="offcanvas" *ngIf="!isLogged()">Iniciar sesión</button>
-            <button class="btn btn-primary" routerLink="/menu/order" data-bs-dismiss="offcanvas" *ngIf="isLogged()">Pedir</button>
+            <button class="btn btn-primary" routerLink="/menu/order" data-bs-dismiss="offcanvas" *ngIf="isLogged() && !(isAdmin() || isEmployee())">Pedir</button>
             <button class="btn btn-outline-primary" (click)="logOut()" data-bs-dismiss="offcanvas" *ngIf="isLogged()">Cerrar Sesión</button>
         </div>
     </div>

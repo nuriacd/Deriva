@@ -41,6 +41,8 @@ import { MyDataComponent } from './my-data/my-data.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { StockComponent } from './stock/stock.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ProductDataComponent } from './product-data/product-data.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { StockComponent } from './stock/stock.component';
     ChangePasswordComponent,
     CheckOutComponent,
     StockComponent,
+    NotFoundComponent,
+    ProductDataComponent,
     
   ],
   imports: [

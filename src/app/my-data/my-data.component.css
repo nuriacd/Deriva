@@ -2,7 +2,6 @@ section {
     margin: 1em;
 }
 
-
 .btn-secondary {
     margin: 1em 0;
     width: 100% !important;
@@ -14,4 +13,14 @@ mat-dialog-actions {
 
 label {
     color: #858585;
+}
+
+select {
+    padding: 1em 2em;
+    min-width: 250px;
+}
+
+h2 {
+    font-weight: 600 !important;
+    font-size: 1.6em !important;
 }

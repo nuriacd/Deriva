@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeModel } from '../models/employee.model';
+import { MyDataComponent } from '../my-data/my-data.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-admin-table',
@@ -18,6 +20,7 @@ export class EmployeeAdminTableComponent {
 
   constructor(
     private _userService: UserService,
+    private _dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +50,33 @@ export class EmployeeAdminTableComponent {
     }
   }
 
+  editUser(user?: EmployeeModel) {
+    let dialogRef;
 
+    if (user) {
+      let id = user.id;
+      dialogRef = this._dialog.open(MyDataComponent, { data: { id: id, pwd: false, employee: true } });
+    } else{
+      dialogRef = this._dialog.open(MyDataComponent, { data: { pwd: false, employee: true } });
+
+    }
+
+    dialogRef.afterClosed().subscribe({   
+      next: (val) => {
+        if (val)
+          this.loadEmployees();    
+      }
+    });
+  }
+
+  deleteUser(id: number) {
+    this._userService.deleteUser(id).subscribe({
+      next: (res) => {
+        console.log('Usuario borrado')
+        this.loadEmployees();
+      },
+      error: console.log
+    })
+  }
 
 }

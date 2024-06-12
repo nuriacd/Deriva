@@ -1,0 +1,22 @@
+.col img {
+    width: 100%;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    text-align: center;
+    min-width: 280px;
+}
+
+.container {
+    margin: 0 auto;
+    flex-wrap: wrap-reverse;
+}
+
+p {
+    margin: 2em 0;
+}

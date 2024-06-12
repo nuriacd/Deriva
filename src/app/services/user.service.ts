@@ -30,6 +30,10 @@ export class UserService {
         return this._http.post(`${this.apiUrl}/new`, data);
     }
 
+    createEmployee(data: any): Observable<any> {
+        return this._http.post(`${this.apiUrl}/new/employee`, data);
+    }
+
     getUser(id: string): Observable<any> {
         return this._http.get(`${this.apiUrl}/${id}/get`);
     }
@@ -38,8 +42,8 @@ export class UserService {
         return this._http.put(`${this.apiUrl}/${id}/edit`, data);
     }
 
-    deleteUser(id: string): Observable<any> {
-        return this._http.delete(`${this.apiUrl}/${id}`);
+    deleteUser(id: number): Observable<any> {
+        return this._http.delete(`${this.apiUrl}/${id}/delete`);
     }
 
     login(data: any): Observable<any> {

@@ -19,6 +19,7 @@ export class LoginComponent {
 
   registerSubmitted = false;
   loginError: string | null = null;
+  registerError: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -70,6 +71,7 @@ export class LoginComponent {
   onRegister(): void 
   {
     this.loginError = null;
+    this.registerError = null;
     this.registerSubmitted = true;
     
     if (this.registerForm.valid) {
@@ -81,7 +83,9 @@ export class LoginComponent {
           subscription.unsubscribe();
           this._router.navigate(['/menu/order']);
         },
-        error: console.log
+        error: () => {
+          this.registerError = "El email ya está en uso"
+        }
       });
     } else {
       console.log(this.registerForm.errors);
@@ -91,6 +95,8 @@ export class LoginComponent {
   onLogin(): void 
   {
     this.registerSubmitted = false;
+    this.registerError = null;
+    this.loginError = null;
 
     if (this.loginForm.value.loginEmail == "" || this.loginForm.value.loginPassword == "") {
       this.loginError = "Debe rellenar los campos de email y contraseña";

@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../services/product.service';
 import { ProductModel } from '../models/product.model';
 import { DishModel } from '../models/dish.model';
+import { ProductDataComponent } from '../product-data/product-data.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-prodct-admin-table',
@@ -18,7 +20,8 @@ export class ProdctAdminTableComponent {
   @ViewChild('productSort') productSort!: MatSort;
 
   constructor(
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +55,10 @@ export class ProdctAdminTableComponent {
 
   isDish(object: any): boolean {
     return object instanceof DishModel;
+  }
+
+  showProduct(product: ProductModel) {
+    this._dialog.open(ProductDataComponent, { data: product });
   }
 
 }
